@@ -493,11 +493,11 @@ func (c *Client) CreateChatCompletion(
 		return
 	}
 
-	urlSuffix := chatCompletionsSuffix
-	if !checkEndpointSupportsModel(urlSuffix, request.Model) {
-		err = ErrChatCompletionInvalidModel
-		return
-	}
+	//urlSuffix := chatCompletionsSuffix
+	//if !checkEndpointSupportsModel(urlSuffix, request.Model) {
+	//	err = ErrChatCompletionInvalidModel
+	//	return
+	//}
 
 	reasoningValidator := NewReasoningValidator()
 	if err = reasoningValidator.Validate(request); err != nil {
@@ -522,7 +522,7 @@ func (c *Client) CreateChatCompletion(
 	req, err := c.newRequest(
 		ctx,
 		http.MethodPost,
-		c.fullURL(urlSuffix, withModel(request.Model)),
+		c.fullURL("", withModel(request.Model)),
 		withBody(body),
 		withExtraHeader(ccOpts.ExtraHeader),
 	)

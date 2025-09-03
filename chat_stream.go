@@ -81,11 +81,11 @@ func (c *Client) CreateChatCompletionStream(
 	request ChatCompletionRequest,
 	opts ...ChatCompletionRequestOption,
 ) (stream *ChatCompletionStream, err error) {
-	urlSuffix := chatCompletionsSuffix
-	if !checkEndpointSupportsModel(urlSuffix, request.Model) {
-		err = ErrChatCompletionInvalidModel
-		return
-	}
+	//urlSuffix := chatCompletionsSuffix
+	//if !checkEndpointSupportsModel(urlSuffix, request.Model) {
+	//	err = ErrChatCompletionInvalidModel
+	//	return
+	//}
 
 	request.Stream = true
 	reasoningValidator := NewReasoningValidator()
@@ -111,7 +111,7 @@ func (c *Client) CreateChatCompletionStream(
 	req, err := c.newRequest(
 		ctx,
 		http.MethodPost,
-		c.fullURL(urlSuffix, withModel(request.Model)),
+		c.fullURL("", withModel(request.Model)),
 		withBody(body),
 		withExtraHeader(ccOpts.ExtraHeader),
 	)
